@@ -47,7 +47,7 @@ pip install -r requirements.txt
 
 ---
 
-## 5. Planned Methodology & Experimental Setup
+## 4. Planned Methodology & Experimental Setup
 
 ### Models Under Comparison
 1. **Baseline**: Custom 2-layer Bidirectional LSTM (BiLSTM) with learned word embeddings trained from scratch.
