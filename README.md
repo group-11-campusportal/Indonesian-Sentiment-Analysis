@@ -14,17 +14,7 @@ Given an informal Indonesian social media or customer review text containing sla
 
 ---
 
-## 2. Team Members & Roles
-
-| Member | Role | Key Responsibilities |
-| :--- | :--- | :--- |
-| **Member 1 (Current)** | **Data & Baseline Engineer** | Ingestion pipeline, split verification, leakage audit, data distribution profiling, and scratch PyTorch BiLSTM architecture. |
-| **Member 2** | **Deep Learning / Transformer Engineer** | Method A & Method B implementation, IndoBERT/IndoBERTweet fine-tuning, custom design decision (loss/head). |
-| **Member 3** | **Experiments, Analysis & Paper Lead** | Multi-seed execution framework, metric aggregation (`mean ± std`), learning curves, confusion matrix, failure analysis, and IEEE LaTeX compilation. |
-
----
-
-## 3. Dataset Overview & Distribution
+## 2. Dataset Overview & Distribution
 
 We utilize the official **SmSA (Sentiment Analysis for Indonesian)** benchmark from the **IndoNLU** project ([Wilie et al., 2020](https://arxiv.org/abs/2011.00677)).
 
@@ -41,7 +31,7 @@ We utilize the official **SmSA (Sentiment Analysis for Indonesian)** benchmark f
 
 ---
 
-## 4. Environment Setup
+## 3. Environment Setup
 
 ### Prerequisites
 - Python 3.9+
@@ -57,22 +47,7 @@ pip install -r requirements.txt
 
 ---
 
-## 5. Reproducing Milestone 1 (Data Preparation)
-
-To download the raw IndoNLU SmSA benchmark, audit for data leakage, compute class distributions, and generate clean split CSVs:
-```bash
-python prepare_data.py
-```
-
-Generated artifacts in `data/`:
-- `data/train_split.csv` (10,984 rows)
-- `data/val_split.csv` (1,260 rows)
-- `data/test_split.csv` (500 rows)
-- `data/class_distribution.csv`
-
----
-
-## 6. Planned Methodology & Experimental Setup
+## 5. Planned Methodology & Experimental Setup
 
 ### Models Under Comparison
 1. **Baseline**: Custom 2-layer Bidirectional LSTM (BiLSTM) with learned word embeddings trained from scratch.
