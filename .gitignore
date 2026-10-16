@@ -44,3 +44,4 @@ Thumbs.db
 
 #datasets
 data/*.csv
+data/*.json
