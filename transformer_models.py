@@ -26,6 +26,21 @@ def load_transformer(model_name: str):
     return model, tokenizer
 
 
+def tokenize_batch(texts: list[str], tokenizer: AutoTokenizer):
+    """Tokenize original texts into PyTorch inputs for the matching model.
+
+    Limit sequences to 256 tokens including special tokens, then pad only to
+    the longest sequence in this batch.
+    """
+    return tokenizer(
+        texts,
+        truncation=True,
+        max_length=256,
+        padding=True,
+        return_tensors="pt",
+    )
+
+
 def create_loss(class_weights: Optional[Tensor] = None) -> nn.CrossEntropyLoss:
     """Create cross-entropy loss, optionally weighted in LABEL2ID order."""
     return nn.CrossEntropyLoss(weight=class_weights)
