@@ -40,8 +40,8 @@ We utilize the official **SmSA (Sentiment Analysis for Indonesian)** benchmark f
 ### Installation
 Clone this repository and install the dependencies:
 ```bash
-git clone <your-github-repo-url>
-cd FinalProject
+git clone https://github.com/group-11-campusportal/Indonesian-Sentiment-Analysis.git
+cd Indonesian-Sentiment-Analysis
 pip install -r requirements.txt
 ```
 
@@ -51,7 +51,7 @@ pip install -r requirements.txt
 
 ### Models Under Comparison
 1. **Baseline**: Custom 2-layer Bidirectional LSTM (BiLSTM) with learned word embeddings trained from scratch.
-2. **Method A**: Pretrained Multilingual Transformer (`xlm-roberta-base` or `bert-base-multilingual-cased`).
+2. **Method A**: Pretrained Multilingual Transformer (`xlm-roberta-base`).
 3. **Method B (Custom Design Decision)**: Monolingual `IndoBERT` (`indobenchmark/indobert-base-p1`) fine-tuned with **Class-Weighted Cross-Entropy Loss** to combat severe neutral class imbalance.
 
 ### Hypothesis

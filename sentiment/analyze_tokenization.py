@@ -1,6 +1,6 @@
 """
 Tokenization Analysis — Indonesian Sentiment (SmSA)
-Produces numbers used directly in tokenization_strategy.md.
+Produces numbers used directly in docs/tokenization_strategy.md.
 """
 
 import argparse
@@ -108,7 +108,7 @@ def analyze_tokenizers(texts, offline=False):
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument(
-        "--data-dir", type=Path, default=Path(__file__).resolve().parent / "data",
+        "--data-dir", type=Path, default=Path(__file__).resolve().parent.parent / "data",
         help="Directory containing train_split.csv and receiving audit JSON files.",
     )
     parser.add_argument(
