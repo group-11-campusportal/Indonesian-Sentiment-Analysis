@@ -9,7 +9,7 @@
 
 **Takeaway**: texts are short-to-medium length, but word counts do not establish
 subword token lengths. The optional pretrained-tokenizer analysis in
-`analyze_tokenization.py` reproduces the following results on the same training
+[`sentiment/analyze_tokenization.py`](../sentiment/analyze_tokenization.py) reproduces the following results on the same training
 split, including special tokens and without padding or truncation:
 
 | Tokenizer | Min | Max | Mean | p95 | Texts >128 tokens | Texts >256 tokens | Texts >512 tokens |
@@ -36,7 +36,7 @@ validation, test, and future inputs has not been established by this check.
 | url             |     0 |        0.0% |
 | emoji_non_ascii |     0 |        0.0% |
 
-**Takeaway**: `analyze_tokenization.py` finds informal-pattern matches in
+**Takeaway**: `sentiment/analyze_tokenization.py` finds informal-pattern matches in
 26.5% of training texts and English-word-pattern matches in 16.8%. The former
 includes variants such as `gak`, `nggak`, `bgt`, `yg`, and `kalo`; the latter
 includes review and restaurant terms such as `food`, `service`, `delivery`,

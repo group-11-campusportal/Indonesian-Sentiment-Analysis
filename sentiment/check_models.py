@@ -7,7 +7,7 @@ import pandas as pd
 import torch
 from transformers import set_seed
 
-from transformer_models import (
+from .transformer_models import (
     LABEL2ID,
     NUM_LABELS,
     count_parameters,
@@ -97,7 +97,7 @@ def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--method", choices=("a", "b"), required=True)
     parser.add_argument(
-        "--data-dir", type=Path, default=Path(__file__).resolve().parent / "data",
+        "--data-dir", type=Path, default=Path(__file__).resolve().parent.parent / "data",
         help="Directory containing the cleaned train_split.csv.",
     )
     args = parser.parse_args()
