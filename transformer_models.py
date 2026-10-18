@@ -23,6 +23,8 @@ def load_transformer(model_name: str):
         label2id=LABEL2ID.copy(),
         id2label=ID2LABEL.copy(),
     )
+    # make all the parameters trainable for finetuning
+    model.requires_grad_(True)
     return model, tokenizer
 
 
