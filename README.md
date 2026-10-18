@@ -40,8 +40,8 @@ We utilize the official **SmSA (Sentiment Analysis for Indonesian)** benchmark f
 ### Installation
 Clone this repository and install the dependencies:
 ```bash
-git clone <your-github-repo-url>
-cd FinalProject
+git clone https://github.com/group-11-campusportal/Indonesian-Sentiment-Analysis.git
+cd Indonesian-Sentiment-Analysis
 pip install -r requirements.txt
 ```
 
