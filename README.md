@@ -35,7 +35,7 @@ We utilize the official **SmSA (Sentiment Analysis for Indonesian)** benchmark f
 
 ### Prerequisites
 - Python 3.9+
-- GPU runtime (Google Colab T4 or local CUDA-enabled environment)
+- Python runtime with CUDA or Apple MPS for GPU training; CPU is supported but slower.
 
 ### Installation
 Clone this repository and install the dependencies:
