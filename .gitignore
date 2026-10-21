@@ -45,3 +45,6 @@ Thumbs.db
 #datasets
 data/*.csv
 data/*.json
+
+# Experiment checkpoints, logs, and predictions
+outputs/
