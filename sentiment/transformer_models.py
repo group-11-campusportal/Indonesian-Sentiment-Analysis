@@ -5,7 +5,11 @@ from typing import Iterable, Optional
 
 import torch
 from torch import Tensor, nn
-from transformers import AutoModelForSequenceClassification, AutoTokenizer
+try:
+    from transformers import AutoModelForSequenceClassification, AutoTokenizer
+except ImportError:
+    AutoModelForSequenceClassification = None
+    AutoTokenizer = None
 
 
 # Use the same class order for model outputs, labels, and future loss weights.
@@ -28,7 +32,7 @@ def load_transformer(model_name: str):
     return model, tokenizer
 
 
-def tokenize_batch(texts: list[str], tokenizer: AutoTokenizer):
+def tokenize_batch(texts: list[str], tokenizer):
     """Tokenize original texts into PyTorch inputs for the matching model.
 
     Limit sequences to 256 tokens including special tokens, then pad only to
