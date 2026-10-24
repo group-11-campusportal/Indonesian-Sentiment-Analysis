@@ -1,0 +1,63 @@
+{
+  "method": "baseline",
+  "model": "bilstm_custom",
+  "seed": 42,
+  "device": "cuda",
+  "gpu": "Tesla T4",
+  "parameters": {
+    "total": 1792003,
+    "trainable": 1792003
+  },
+  "selected_epoch": 5,
+  "training_seconds": 20.764462311000216,
+  "timing": "Sum of training and validation epoch durations; excludes checkpoint writes and final inference",
+  "config": {
+    "epochs": 5,
+    "batch_size": 32,
+    "optimizer": "Adam",
+    "learning_rate": 0.001,
+    "weight_decay": 0.0001,
+    "max_grad_norm": 1.0,
+    "max_length": 128,
+    "vocab_size": 8842,
+    "label2id": {
+      "negative": 0,
+      "neutral": 1,
+      "positive": 2
+    }
+  },
+  "splits": {
+    "train": {
+      "rows": 10984,
+      "sha256": "89e626daa180c022b274cfa66572b0edc137369f761386f937be2ff7bf3b3649"
+    },
+    "val": {
+      "rows": 1260,
+      "sha256": "341f5e80346fdbeecc6c7ced5f79da4272dce6b470300f9d6b6d27fd0ff15501"
+    },
+    "test": {
+      "rows": 500,
+      "sha256": "85a0512997522cf821ca74b0cdb113a481efd4ed8579b499562415f5f535cbf3"
+    }
+  },
+  "versions": {
+    "torch": "2.11.0+cu130",
+    "numpy": "2.1.3",
+    "pandas": "2.2.3",
+    "scikit-learn": "1.6.1"
+  },
+  "metrics": {
+    "val": {
+      "loss": 0.33113292485239015,
+      "accuracy": 0.8984126984126984,
+      "macro_f1": 0.8624036168056167,
+      "weighted_f1": 0.8983206326341158
+    },
+    "test": {
+      "loss": 0.5888048715591431,
+      "accuracy": 0.806,
+      "macro_f1": 0.7575423069655436,
+      "weighted_f1": 0.7997343961891873
+    }
+  }
+}
