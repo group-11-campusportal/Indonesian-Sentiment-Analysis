@@ -52,29 +52,24 @@ checks all non-ASCII characters, rather than identifying emoji specifically.
 
 ---
 
-## 3. Tokenization Decisions
+## 3. Implemented Tokenization
 
 ### BiLSTM (trained from scratch)
 
-- Build vocab from train split with **min_freq = 2** to filter one-off noise.
-- Apply **elongation normalization** before building vocab:
-  `re.sub(r'(.)\1{3,}', r'\1\1', text)` — reduces runs of **4 or more**
-  identical characters to 2, leaving runs of 3 unchanged.
-- The audit detects runs of **3 or more** (`r'(.)\1{2,}'`, 248 texts), whereas
-  this proposed normalization affects only 30 training texts. These thresholds
-  serve different purposes and should not be reported as the same count.
-- Keep informal abbreviations as-is to preserve potentially useful sentiment
-  cues.
-- Use `<UNK>` for rare/unseen tokens at inference.
-- Apply the same preprocessing at training and inference; build the vocabulary
-  from training data only.
+- Lowercase text and extract tokens with `re.findall(r'\w+', text.lower())`.
+- Build the vocabulary from training texts only, with **min_freq = 2**;
+  the current vocabulary has **8,842 entries**, including `<pad>` and `<unk>`.
+- Retain informal abbreviations and repeated characters; the implemented
+  tokenizer does **not** apply elongation normalization.
+- Map rare or unseen tokens to `<unk>`, truncate to 128 tokens, and pad shorter
+  sequences to 128 using `<pad>`.
+- Use the same tokenizer and saved training vocabulary during inference.
 
-**Rationale**: BiLSTM learns embeddings from scratch, so reducing rare spelling
-variants may help vocabulary coverage. Conservative elongation normalization
-and `min_freq = 2` are starting choices, not demonstrated improvements.
-Repetition can also convey emphasis, and the corpus-level informal-pattern
-rate does not establish that each abbreviation is frequent enough to learn a
-strong embedding.
+**Rationale**: the frequency threshold limits the vocabulary for embeddings
+learned from scratch. An earlier proposal to normalize runs of four or more
+characters was not implemented in the reported baseline. Its effect on
+classification has not been measured. The corpus-level informal-pattern rate
+does not establish how well individual abbreviations are represented.
 
 ### IndoBERT (`indobenchmark/indobert-base-p1`)
 
@@ -105,10 +100,11 @@ usage on sentiment performance remain hypotheses to test.
 
 ## 4. Summary
 
-| Model | Tokenizer | Additional preprocessing | Starting decision |
+| Model | Tokenizer | Additional preprocessing | Implemented setting |
 | :---- | :-------- | :----------------------- | :---------------- |
-| BiLSTM | Whitespace + Counter | Reduce character runs of 4+ to 2 | Train-only vocabulary; min_freq=2; `<UNK>` for unseen tokens |
+| BiLSTM | Regex `\w+` + Counter | Lowercase; no elongation normalization | Train-only vocabulary; min_freq=2; `<unk>`; length 128 |
 | IndoBERT | Pretrained WordPiece | None; retain built-in lowercasing | max_length=256; dynamic padding; train max=132 tokens |
 | XLM-R | Pretrained SentencePiece | None; retain built-in normalization | max_length=256; dynamic padding; train max=164 tokens |
 
-These are tokenization starting choices, not measured classification results.
+These settings describe the implementation used by the training scripts;
+the audit statistics do not establish a causal effect on classification.
