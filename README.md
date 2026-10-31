@@ -38,8 +38,7 @@ line endings; normalizing line endings reproduces the recorded hashes.
 ## 3. Environment Setup
 
 ### Prerequisites
-- Python 3.10 or later is required by the code's type annotations. The local
-  checks described below ran with Python 3.11.
+- Python 3.10 or later is required.
 - Python runtime with CUDA or Apple MPS for GPU training; CPU is supported but slower.
 
 ### Installation
@@ -79,24 +78,6 @@ comparison cannot isolate the effect of weighting alone.
   microbatch size is 4 with 4 accumulation steps (effective batch size 16).
 - The baseline used a Tesla T4; both transformers used an RTX 3050 Laptop GPU.
   Recorded runtimes are comparable between A and B, but not across those GPUs.
-
-### Recorded training environments
-
-These versions come from the saved `summary.json` files. They are historical
-run records, not a claim that a fresh installation has been fully validated.
-CUDA build suffixes describe the original machines.
-
-| Package | Baseline | Methods A and B |
-| :--- | :--- | :--- |
-| PyTorch | 2.11.0+cu130 | 2.11.0+cu128 |
-| Transformers | Not recorded | 5.20.2 |
-| NumPy | 2.1.3 | 2.5.4 |
-| pandas | 2.2.3 | 3.0.6 |
-| scikit-learn | 1.6.1 | 1.9.1 |
-
-`requirements.txt` lists the dependencies without version pins. A tested
-environment lock and a complete fresh-environment training rerun remain to be
-verified on the intended training machine.
 
 ## 5. Reproduce the Training Pipeline
 
@@ -190,12 +171,3 @@ the saved histories and selected run's test predictions.
 `data/` CSV/JSON files and `outputs/` are Git-ignored; a clean clone does not
 contain those artifacts. Generate them or obtain the recorded outputs before
 running analysis.
-
-## 7. Verification Scope
-
-On 29 October 2026, the review reproduced the reported test metrics from saved
-predictions for all nine runs and checked the aggregate table, split counts,
-exact overlaps, and line-ending hash differences. A local baseline one-batch
-forward/backward/update check passed. The full pretrained training pipeline
-was not rerun in a fresh environment, and identical scores across different
-hardware or library versions are not guaranteed by setting seeds alone.
