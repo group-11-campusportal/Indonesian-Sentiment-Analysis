@@ -38,7 +38,7 @@ line endings; normalizing line endings reproduces the recorded hashes.
 ## 3. Environment Setup
 
 ### Prerequisites
-- Python 3.10 or later is required.
+- Python 3.11 or later is required.
 - Python runtime with CUDA or Apple MPS for GPU training; CPU is supported but slower.
 
 ### Installation
