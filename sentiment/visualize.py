@@ -48,15 +48,16 @@ def find_runs(output_dir: Path) -> dict[str, list[Path]]:
 
 
 def plot_loss_curves(runs: dict[str, list[Path]], figures_dir: Path) -> Path:
-    """Draw train and validation loss per epoch: one panel per model.
+    """Draw train and validation loss per epoch in vertically stacked panels.
 
     The line is the mean over seeds; the shaded band spans the lowest to the
     highest seed. Each panel has its own y axis because Method B's loss is
     class-weighted, so its numbers are on a different scale.
     """
     models = [model for model in MODEL_NAMES if model in runs]       # keep the fixed order
-    fig, axes = plt.subplots(1, len(models), figsize=(5 * len(models), 4), squeeze=False)
-    for ax, model in zip(axes[0], models):
+    # A single-column paper figure needs legible labels at its final width.
+    fig, axes = plt.subplots(len(models), 1, figsize=(4.4, 2.2 * len(models)), squeeze=False)
+    for ax, model in zip(axes[:, 0], models):
         # stack every seed's history.csv into one table, with a "seed" column
         history = pd.concat(
             pd.read_csv(run / "history.csv").assign(seed=run.name) for run in runs[model]
@@ -70,12 +71,12 @@ def plot_loss_curves(runs: dict[str, list[Path]], figures_dir: Path) -> Path:
             ax.plot(mean.index, mean.values, marker="o", color=color, label=label)
             # shaded band from the lowest to the highest seed at each epoch
             ax.fill_between(mean.index, per_epoch.min(), per_epoch.max(), color=color, alpha=0.2)
-        ax.set_title(f"{MODEL_NAMES[model]}\n({len(runs[model])} seeds)")
+        ax.set_title(f"{MODEL_NAMES[model]} ({len(runs[model])} seeds)", fontsize=10)
         ax.set_xlabel("Epoch")
         ax.set_ylabel("Cross-entropy loss")
         ax.set_xticks(sorted(history["epoch"].unique()))   # whole epochs only: 1, 2, 3, ...
         ax.grid(alpha=0.3)
-        ax.legend()
+        ax.legend(fontsize=9)
     fig.tight_layout()
     path = figures_dir / "loss_curves.png"
     fig.savefig(path, dpi=200)                     # 200 dpi is sharp enough for the paper
